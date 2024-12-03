@@ -43,7 +43,7 @@ class RegisterActivity : AppCompatActivity() {
     fun back(view : View){
         val intent = Intent(this, EntryActivity::class.java)
         startActivity(intent)
-        finish() // Закрываем текущую активити
+        finish()
     }
 
 }

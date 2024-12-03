@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var authManager: AuthManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -21,6 +22,7 @@ class LoginActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         authManager = AuthManager(this)
 
         val emailInput = findViewById<EditText>(R.id.emailInput)
@@ -33,16 +35,14 @@ class LoginActivity : AppCompatActivity() {
 
             if (authManager.login(email, password)) {
                 val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent);
+                startActivity(intent)
             }
         }
-
     }
-    fun back(view : View){
+
+    fun back(view: View) {
         val intent = Intent(this, EntryActivity::class.java)
         startActivity(intent)
         finish()
     }
-
-
 }

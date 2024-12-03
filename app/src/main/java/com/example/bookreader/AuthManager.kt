@@ -10,15 +10,20 @@ import java.io.FileWriter
 
 data class User(val email: String, val password: String)
 
-fun isValidEmail(email: String): Boolean {
+/*fun isValidEmail(email: String): Boolean {
     return Patterns.EMAIL_ADDRESS.matcher(email).matches()
-}
+}*/
 
 fun isValidPassword(password: String): Boolean {
     return password.length >= 4
 }
 
 class AuthManager(private val context: Context) {
+    init {
+        System.loadLibrary("bookreader")
+    }
+
+    private external fun isValidEmail(email: String): Boolean
     private val fileName = "users.json"
     private val gson = GsonBuilder().setPrettyPrinting().create()
 
@@ -70,7 +75,6 @@ class AuthManager(private val context: Context) {
             return false
         }
         else{
-            Toast.makeText(context, "Успешный вход", Toast.LENGTH_SHORT).show()
             return true
         }
     }

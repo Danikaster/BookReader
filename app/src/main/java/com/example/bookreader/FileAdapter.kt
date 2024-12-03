@@ -20,13 +20,17 @@ class FileAdapter(private val items: List<File>) : RecyclerView.Adapter<FileAdap
         val file = items[position]
         holder.fileName.text = file.name
 
-        // Обработка клика на элементе
         holder.itemView.setOnClickListener {
             if (file.extension.equals("txt", ignoreCase = true)) {
-                // Если файл с расширением .txt, открываем TextFileViewerActivity
                 val context = holder.itemView.context
                 val intent = Intent(context, TextFileViewerActivity::class.java)
-                intent.putExtra("file_path", file.absolutePath) // Передаем путь к файлу
+                intent.putExtra("file_path", file.absolutePath)
+                context.startActivity(intent)
+            }
+            if (file.extension.equals("fb2", ignoreCase = true)) {
+                val context = holder.itemView.context
+                val intent = Intent(context, FB2ReaderActivity::class.java)
+                intent.putExtra("file_path", file.absolutePath)
                 context.startActivity(intent)
             }
         }
@@ -40,4 +44,3 @@ class FileAdapter(private val items: List<File>) : RecyclerView.Adapter<FileAdap
         val fileName: TextView = itemView.findViewById(R.id.fileName)
     }
 }
-

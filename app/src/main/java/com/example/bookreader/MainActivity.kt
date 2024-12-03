@@ -37,30 +37,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Инициализация RecyclerView
         recyclerView = findViewById(R.id.listOfBooks)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Проверка разрешений
         if (ContextCompat.checkSelfPermission(this, READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(READ_EXTERNAL_STORAGE), 1)
         } else {
-            loadFiles()  // Загружаем файлы, если разрешение предоставлено
+            loadFiles()
         }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 1 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            loadFiles()  // Загружаем файлы после получения разрешения
+            loadFiles()
         }
     }
 
     private fun loadFiles() {
-        // Получаем файлы из папки Downloads
         val filesList = getFilesFromDownloads()
 
-        // Инициализируем адаптер и передаем список файлов
         adapter = FileAdapter(filesList)
         recyclerView.adapter = adapter
     }
@@ -69,8 +65,7 @@ class MainActivity : AppCompatActivity() {
         val downloadsDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
         val files = downloadsDirectory.listFiles()
 
-        // Фильтруем файлы по расширениям .txt и .pdf, и сортируем по алфавиту
-        return files?.filter { it.isFile && (it.extension.equals("txt", ignoreCase = true) || it.extension.equals("pdf", ignoreCase = true)) }
+        return files?.filter { it.isFile && (it.extension.equals("txt", ignoreCase = true) || it.extension.equals("fb2", ignoreCase = true)) }
             ?.sortedBy { it.name } ?: emptyList()
     }
 }

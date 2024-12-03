@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 
@@ -17,7 +18,7 @@
         android:theme="@style/Theme.BookReader"
         tools:targetApi="31">
         <activity
-            android:name=".PdfFileViewerActivity"
+            android:name=".FB2ReaderActivity"
             android:exported="false" />
         <activity
             android:name=".TextFileViewerActivity"
